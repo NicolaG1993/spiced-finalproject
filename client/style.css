@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    background-color: rgb(42, 65, 195);
+    color: ghostwhite;
+    font-family: "Nunito Sans";
+}
+
+/* GENERAL */
+a {
+    color: ghostwhite;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+a:hover {
+    font-weight: bold;
+    /* color: goldenrod; */
+}
