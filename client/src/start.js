@@ -6,7 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer } from "./redux/reducer";
 import { init } from "./socket.js";
 
-import App from "./App";
+import { App } from "./App.js";
 import Welcome from "./welcome";
 
 const store = createStore(

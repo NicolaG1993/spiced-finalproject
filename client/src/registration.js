@@ -1,8 +1,5 @@
-// src/registration.js
-// class component have state!
-// (class components also have lifecycle methods (like componentDidMount))
 import React from "react";
-import axios from "./axios"; //we import axios from our js file (pt2), not from the module (axios.js has it already)
+import axios from "./axios";
 import { Link } from "react-router-dom";
 
 export default class Registration extends React.Component {
@@ -15,13 +12,10 @@ export default class Registration extends React.Component {
             email: "",
             password: "",
         };
-        // strategy #1 for binding
-        // this.handleChange = this.handleChange.bind(this);
-    }
 
-    // 1. we need to store the user's input in state
-    // 2. when user clicks "submit," we need to take the input we got from the user
-    // and send it off to the server in a `POST` request
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
+    }
 
     handleClick() {
         // remaining tasks: make the red underlines go away!
@@ -51,9 +45,7 @@ export default class Registration extends React.Component {
             });
     }
 
-    // this is how we handle user input in React!
     handleChange(e) {
-        // console.log("e target value: ", e.target.value);
         // which input field is the user typing in?
         console.log("e target name: ", e.target.name);
         this.setState(
@@ -62,16 +54,6 @@ export default class Registration extends React.Component {
             },
             () => console.log("this.state after setState: ", this.state)
         );
-        // this.setState is used to put/update state!
-        // if (e.target.name === "first") {
-        //     this.setState({
-        //         first: e.target.value,
-        //     });
-        // } else if (e.target.name === "last") {
-        //     this.setState({
-        //         last: e.target.value,
-        //     });
-        // }
     }
 
     render() {
@@ -80,7 +62,6 @@ export default class Registration extends React.Component {
                 {this.state.error && <p>Something broke :(</p>}
                 <h1>Registration</h1>
                 <Link to="/login">Click here to Log in!</Link>
-                {/* strategy #2 for binding: arrow functions! */}
                 <br />
                 <input
                     className="auth-input"

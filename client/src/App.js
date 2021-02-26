@@ -3,13 +3,20 @@ import { Component } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import Logo from "./Logo";
+import Home from "./Home";
 
 export class App extends Component {
     constructor(props) {
         super(props);
 
         // Initialize App's state
-        this.state = {};
+        this.state = {
+            first: "",
+            last: "",
+            profilePicUrl: props.profile_pic_url || "",
+            bio: "",
+            size: "",
+        };
     }
 
     async componentDidMount() {
@@ -45,24 +52,17 @@ export class App extends Component {
             <BrowserRouter>
                 <div className={"app"}>
                     <div className={"header"}></div>
-                    <Logo />
+                    <Link to={"/"}>
+                        <Logo />
+                    </Link>
+                    <nav>
+                        <Link to={`/`}>Profile</Link>
+                        <a href="/logout">Logout</a>
+                    </nav>
+
                     <div className={"main"}>
                         {this.state.error && <p>Something broke :(</p>}
-                        <Route
-                            exact
-                            path="/"
-                            render={() => (
-                                <Profile
-                                    // Passing down props:
-                                    firstName={this.state.first}
-                                    lastName={this.state.last}
-                                    profilePicUrl={this.state.profilePicUrl}
-                                    bio={this.state.bio}
-                                    setBio={this.setBio}
-                                    toggleUploader={this.toggleUploader}
-                                />
-                            )}
-                        />
+                        <Route exact path="/" render={() => <Home />} />
                     </div>
                 </div>
             </BrowserRouter>
