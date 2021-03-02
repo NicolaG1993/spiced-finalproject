@@ -12,7 +12,14 @@ export function reducer(state = {}, action) {
         state = {
             ...state,
             followersList: state.followersList.map((elem) => {
-                return elem;
+                if (elem.sender_id === action.profileId) {
+                    return {
+                        ...elem,
+                        following: true,
+                    };
+                } else {
+                    return elem;
+                }
             }),
         };
     }
@@ -22,7 +29,7 @@ export function reducer(state = {}, action) {
         state = {
             ...state,
             followersList: state.followersList.filter(
-                (elem) => elem.sender_id !== action.profileId
+                (elem) => !elem.sender_id !== action.profileId
             ),
         };
     }

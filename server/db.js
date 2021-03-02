@@ -77,7 +77,7 @@ module.exports.followStatus = (userId, id) => {
 };
 
 module.exports.follow = (userId, id) => {
-    const myQuery = `INSERT INTO follows (sender_id, recipient_id, following) VALUES ($1, $2, true)`;
+    const myQuery = `INSERT INTO follows (sender_id, recipient_id) VALUES ($1, $2)`;
     const keys = [userId, id];
     return db.query(myQuery, keys);
 };

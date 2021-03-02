@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFollowers, follow, unfollow } from "./redux/actions";
-import FollowButton from "./follow-btn";
 
 export default function Followers(props) {
     console.log("FOLLOWERS COMPONENT ACTIVATED");
 
     const dispatch = useDispatch();
-    const [buttonText, setButtonText] = useState("");
+    // const [buttonText, setButtonText] = useState("");
 
     const following = useSelector(
         (state) =>
             state.followersList &&
             state.followersList.filter(
-                (elem) => elem.sender_id === props.userId
+                (elem) => elem.sender_id === props.userId || elem.following
             )
     );
 
@@ -30,17 +29,17 @@ export default function Followers(props) {
 
     useEffect(() => {
         dispatch(getFollowers());
-    }, []);
+    }, [props.userId]);
 
-    const btnRequest = async () => {
-        console.log("btnRequest!");
+    // const btnRequest = async () => {
+    //     console.log("btnRequest!");
 
-        if (elem.sender_id === props.userId) {
-            setButtonText(data.buttonText);
-        } else {
-            setButtonText(data.buttonText);
-        }
-    };
+    //     if (elem.sender_id === props.userId) {
+    //         setButtonText(data.buttonText);
+    //     } else {
+    //         setButtonText(data.buttonText);
+    //     }
+    // };
 
     if (!following && !followers) {
         console.log("following: ", following);
@@ -95,9 +94,9 @@ export default function Followers(props) {
                             {elem.first} {elem.last}
                         </p>
 
-                        <button className="auto" onClick={() => btnRequest()}>
+                        {/* <button className="auto" onClick={() => btnRequest()}>
                             {buttonText}
-                        </button>
+                        </button> */}
 
                         <button onClick={() => dispatch(follow(elem.id))}>
                             Follow
