@@ -358,7 +358,7 @@ app.get("/api/get-followers", async (req, res) => {
     try {
         const { rows } = await db.followersList(req.session.userId);
         console.log("rows (followersList): ", rows);
-        res.json(rows);
+        res.json({ rows, userId: req.session.userId });
     } catch (err) {
         console.log("err with db.followersList: ", err);
         res.json({ error: true });
@@ -413,11 +413,15 @@ di conseguenza non posso dichiarare fn dentro (sure) ne alterare state (not sure
 4.3) Sará comunque possibile vedere chi ci segue
 
 5) Followers List 🐞
-5.1) Update della funzione di friendList in db 🌵?
-5.2) Update delle funzioni di friendList in redux (actions e reducer) 🐞
-5.3) Sistemare use selector (ho passato id da app come props, giusto?) 🌵?
-5.4) Usare solo un btn in following e followers (che si aggiorna solo per user) 🐞
+5.1) Update della funzione di friendList in db 🌵
+5.2) Update delle funzioni di friendList in redux (actions e reducer) 🌵
+5.3) Sistemare use selector (ho passato id da app come props, giusto?) 🌵
+5.4) Usare solo un btn in following e followers (che si aggiorna solo per user) 🌵
 5.5) devono esserci due liste diverse ma che possono contenere entrambe lo stesso profilo (se ci seguiamo a vicenda) 🌵
+5.6) unfollow funziona solo se follow prima (in Follower List), se aggiorno la lista é ok (forse il problema é in reducer?) 🐞
+5.7) se arrivo da un altra pagina il btn non matcha piu, ed ho un clone del mio elemento (praticamente tutto funziona solo se su quello che faccio nel component, quando esco iniziano i bugs) 🐞
+
+6)
 
 */
 

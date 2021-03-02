@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFollowers, follow, unfollow } from "./redux/actions";
 
@@ -29,7 +29,7 @@ export default function Followers(props) {
 
     useEffect(() => {
         dispatch(getFollowers());
-    }, [props.userId]);
+    }, []);
 
     // const btnRequest = async () => {
     //     console.log("btnRequest!");
@@ -83,6 +83,20 @@ export default function Followers(props) {
 
             <h2>Followers</h2>
             {followers.map((elem, index) => {
+                let btnElem = (
+                    <button onClick={() => dispatch(follow(elem.id))}>
+                        Follow
+                    </button>
+                );
+
+                if (elem.sender_id === props.userId || elem.following) {
+                    btnElem = (
+                        <button onClick={() => dispatch(unfollow(elem.id))}>
+                            Unfollow
+                        </button>
+                    );
+                }
+
                 return (
                     <div className="userCard" key={index}>
                         <img
@@ -94,16 +108,7 @@ export default function Followers(props) {
                             {elem.first} {elem.last}
                         </p>
 
-                        {/* <button className="auto" onClick={() => btnRequest()}>
-                            {buttonText}
-                        </button> */}
-
-                        <button onClick={() => dispatch(follow(elem.id))}>
-                            Follow
-                        </button>
-                        <button onClick={() => dispatch(unfollow(elem.id))}>
-                            Unfollow
-                        </button>
+                        {btnElem}
                     </div>
                 );
             })}
