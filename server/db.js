@@ -43,3 +43,59 @@ module.exports.getUser = (id) => {
     const key = [id];
     return db.query(myQuery, key);
 };
+
+module.exports.uploadProfileImage = (url, id) => {
+    const q = `UPDATE users SET profile_pic_url = $1 WHERE id = $2 RETURNING profile_pic_url`; //senza returnin non vedo l'immagine appena la carico, ma solo se ricarico la pagin
+    const keys = [url, id];
+    return db.query(q, keys);
+};
+
+module.exports.updateBio = (bio, id) => {
+    const q = `UPDATE users SET bio = $1 WHERE id = $2 RETURNING bio`;
+    const keys = [bio, id];
+    return db.query(q, keys);
+};
+
+// FIND USERS
+module.exports.findRecentUsers = () => {
+    const myQuery = `SELECT * FROM users ORDER BY id DESC LIMIT 3;`;
+    return db.query(myQuery);
+};
+
+module.exports.findUser = (str) => {
+    const myQuery = `SELECT * FROM users WHERE first ILIKE $1 ORDER BY first ASC`;
+    const key = [str + "%"];
+    return db.query(myQuery, key);
+};
+
+// FOLLOWS
+module.exports.followStatus = (userId, id) => {
+    const myQuery = `SELECT * FROM follows
+    WHERE (sender_id = $1 AND recipient_id = $2)`;
+    const keys = [userId, id];
+    return db.query(myQuery, keys);
+};
+
+module.exports.follow = (userId, id) => {
+    const myQuery = `INSERT INTO follows (sender_id, recipient_id, following) VALUES ($1, $2, true)`;
+    const keys = [userId, id];
+    return db.query(myQuery, keys);
+};
+
+module.exports.unfollow = (userId, id) => {
+    const myQuery = `DELETE FROM follows
+    WHERE (sender_id = $1 AND recipient_id = $2)`;
+    const keys = [userId, id];
+    return db.query(myQuery, keys);
+};
+
+// FOLLOWERS LIST
+module.exports.followersList = (id) => {
+    const myQuery = `SELECT users.id, first, last, profile_pic_url, sender_id, following
+    FROM follows
+    JOIN users
+    ON (recipient_id = $1 AND sender_id = users.id)
+    OR (sender_id = $1 AND recipient_id = users.id)`;
+    const key = [id];
+    return db.query(myQuery, key);
+};
