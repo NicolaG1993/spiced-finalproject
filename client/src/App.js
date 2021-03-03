@@ -13,6 +13,9 @@ import SearchUsers from "./find-people";
 import Followers from "./followers-list";
 // import Chat from "./chat";
 
+// import PostUploader from "./post-uploader";
+// import PostImageUploader from "./post-image-uploader";
+
 export class App extends Component {
     constructor(props) {
         super(props);
@@ -167,6 +170,7 @@ export class App extends Component {
                         <Route path="/chat" render={() => <Chat />} />
 
                         <Route path="/shop" render={() => <Shop />} />
+
                         <Route path="/item/:id" render={() => <Item />} />
                     </div>
                 </div>

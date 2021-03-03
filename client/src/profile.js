@@ -1,5 +1,6 @@
 import BioEditor from "./bio-editor";
 import ProfilePic from "./profile-pic";
+import PostUploader from "./post-uploader";
 
 export default function Profile(props) {
     console.log("Profile.js props", props);
@@ -14,6 +15,8 @@ export default function Profile(props) {
                 size="medium"
             />
             <BioEditor bio={props.bio} setBio={props.setBio} />
+
+            <PostUploader />
         </div>
     );
 }

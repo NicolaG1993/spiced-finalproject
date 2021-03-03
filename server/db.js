@@ -99,3 +99,36 @@ module.exports.followersList = (id) => {
     const key = [id];
     return db.query(myQuery, key);
 };
+
+// POSTS
+module.exports.followingUsersPosts = (userId) => {
+    const myQuery = `SELECT users.id, first, last, profile_pic_url, sender_id
+    FROM follows
+    JOIN users
+    ON (sender_id = users.id AND recipient_id = $1)
+    JOIN comments
+    ON comments.user_id = users.id
+    ORDER BY posts.created_at DESC
+    LIMIT 10`;
+    const key = [userId];
+    return db.query(myQuery, key);
+}; // not tested yet
+
+module.exports.userPosts = (userId) => {
+    const myQuery = `SELECT users.id, first, last, profile_pic_url
+    FROM users
+    JOIN comments
+    ON (users.id = $1 AND comments.user_id = users.id)
+    ORDER BY posts.created_at DESC
+    LIMIT 10`;
+    const key = [userId];
+    return db.query(myQuery, key);
+}; // not tested yet
+
+module.exports.postPost = (id, text, pic) => {
+    const myQuery = `INSERT INTO posts (sender_id, text, pic_url) VALUES ($1, $2, $3)`;
+    const keys = [id, text, pic];
+    return db.query(myQuery, keys);
+}; // not tested yet
+
+// COMMENTS

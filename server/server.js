@@ -365,6 +365,39 @@ app.get("/api/get-followers", async (req, res) => {
     }
 });
 
+/////*****POSTS*****/////
+app.get("/api/following-posts", async (req, res) => {
+    try {
+        const { rows } = await db.followingUsersPosts(req.session.userId);
+        console.log("rows (followingUsersPosts): ", rows);
+        res.json(rows);
+    } catch (err) {
+        console.log("err with db.followingUsersPosts: ", err);
+        res.json({ error: true });
+    }
+});
+app.get("/api/user-posts", async (req, res) => {
+    try {
+        const { rows } = await db.followingUsersPosts(req.session.userId);
+        console.log("rows (followingUsersPosts): ", rows);
+        res.json(rows);
+    } catch (err) {
+        console.log("err with db.followingUsersPosts: ", err);
+        res.json({ error: true });
+    }
+});
+
+app.post("/api/add-posts", async (req, res) => {
+    try {
+        const results = await db.postPost(req.session.userId);
+        console.log("rows (postPost): ", results);
+        res.json(results);
+    } catch (err) {
+        console.log("err with db.postPost: ", err);
+        res.json({ error: true });
+    }
+});
+
 /////*****MORE*****/////
 app.get("/logout", requireLoggedInUser, (req, res) => {
     req.session = null;
@@ -421,7 +454,31 @@ di conseguenza non posso dichiarare fn dentro (sure) ne alterare state (not sure
 5.6) unfollow funziona solo se follow prima (in Follower List), se aggiorno la lista é ok (forse il problema é in reducer?) 🐞
 5.7) se arrivo da un altra pagina il btn non matcha piu, ed ho un clone del mio elemento (praticamente tutto funziona solo se su quello che faccio nel component, quando esco iniziano i bugs) 🐞
 
-6)
+6) Posts🐞
+6.1) Creo table per i posts 🌵
+6.2) Devo avere un uploader in profilo e su home che mi fa inserire testo ed immagine (non obbligatoria)
+6.3) Avró una getRequest su home che mostra i posts piú recenti, solo da gli id che followo
+6.4) Altra getRequest che mostra solo i posts dal mio id
+6.5) In ogni post ci deve essere un uploader per i commenti
+
+7) Commenti🐞
+7.1) Creo una table per i commenti 🌵
+7.2) Faranno riferimento al'id del post per venire abbinati
+7.3) 
+
+8) Shop🐞
+8.1) Creo table per gli items 🌵
+8.2) Funziona similarmente ai posts
+8.3) In piu cé titolo, prezzo, acquistato (boolean) -> oppure usare buyer_id, tags, category
+8.4) Creare pagina iniziale shop (seleziona categoria)
+8.5) GetRequest per quella categoria
+8.6) Avere una barra di ricerca e filtraggio (prezzo, etc)
+8.7) GetReq su profile e otherProfile in base ad id articoli
+8.8) Ogni articolo mostra le varie infos + un btn per comprare
+8.9) Quando l'articolo é stato venduto diventa inacquistabile
+8.10) Avere un carrello sarebbe ancora meglio (opzionale)
+
+9) DM (opzionale)
 
 */
 

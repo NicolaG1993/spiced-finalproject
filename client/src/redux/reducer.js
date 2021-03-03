@@ -36,6 +36,10 @@ export function reducer(state = {}, action) {
                     return {
                         ...elem,
                         following: false,
+                        sender_id:
+                            elem.sender_id === state.userId
+                                ? undefined
+                                : elem.sender_id,
                     };
                 } else {
                     return elem;
