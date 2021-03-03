@@ -101,6 +101,17 @@ module.exports.followersList = (id) => {
 };
 
 // POSTS
+module.exports.getAllPosts = () => {
+    const myQuery = `SELECT * FROM posts ORDER BY id DESC LIMIT 10`;
+    return db.query(myQuery);
+};
+
+module.exports.postPost = (id, text, pic) => {
+    const myQuery = `INSERT INTO posts (sender_id, text, pic_url) VALUES ($1, $2, $3) RETURNING *`;
+    const keys = [id, text, pic];
+    return db.query(myQuery, keys);
+}; // not tested yet
+
 module.exports.followingUsersPosts = (userId) => {
     const myQuery = `SELECT users.id, first, last, profile_pic_url, sender_id
     FROM follows
@@ -123,12 +134,6 @@ module.exports.userPosts = (userId) => {
     LIMIT 10`;
     const key = [userId];
     return db.query(myQuery, key);
-}; // not tested yet
-
-module.exports.postPost = (id, text, pic) => {
-    const myQuery = `INSERT INTO posts (sender_id, text, pic_url) VALUES ($1, $2, $3)`;
-    const keys = [id, text, pic];
-    return db.query(myQuery, keys);
 }; // not tested yet
 
 // COMMENTS

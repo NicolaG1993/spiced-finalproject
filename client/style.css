@@ -111,6 +111,16 @@ nav > a {
     /* color: rgb(9, 11, 20); */
 }
 
+/* HOME */
+.slider {
+    background-image: url("https://www.adorama.com/alc/wp-content/uploads/2017/08/shutterstock_584510992-1024x681.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 33vh;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
 /* PROFILE */
 
 /* PROFILE PIC */

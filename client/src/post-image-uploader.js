@@ -16,17 +16,26 @@ export default class PostImageUploader extends Component {
     }
 
     handleChange(e) {
-        console.log("e target name: ", e.target.name);
-        this.setState({
-            [e.target.name]: e.target.value,
-            file: e.target.files[0],
-        });
+        console.log("e.target: ", e.target.files[0]);
+        this.setState({ file: e.target.files[0] });
     }
 
     async submit() {
         console.log("submit was clicked");
         const formData = new FormData();
         formData.append("file", this.state.file);
+
+        // try {
+        //     const { data } = await axios.post("/post-pic", formData);
+        //     console.log("data-->Post Pic Uploader: ", data);
+
+        //     await this.props.setProfilePicUrl(data.profile_pic_url);
+        // } catch (err) {
+        //     console.log("err in Uploader-->submit: ", err);
+        //     this.setState({
+        //         error: true,
+        //     });
+        // }
     }
 
     render() {

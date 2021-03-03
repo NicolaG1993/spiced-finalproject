@@ -48,3 +48,18 @@ export async function unfollow(profileId) {
         console.log("err in unfollow(actions): ", err);
     }
 }
+
+export async function getAllPosts() {
+    try {
+        const { data } = await axios.get("/api/all-posts");
+
+        console.log("data in getAllPosts(actions): ", data);
+        return {
+            type: "GET_ALL_POSTS",
+            payload: data.rows,
+            userId: data.userId,
+        };
+    } catch (err) {
+        console.log("err in getAllPosts(actions): ", err);
+    }
+}

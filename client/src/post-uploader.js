@@ -8,7 +8,7 @@ export default class PostUploader extends Component {
             error: false,
             file: null,
         };
-        this.submit = this.submit.bind(this);
+        this.post = this.post.bind(this);
     }
 
     componentDidMount() {
@@ -17,16 +17,29 @@ export default class PostUploader extends Component {
 
     handleChange(e) {
         console.log("e target name: ", e.target.name);
-        this.setState({
-            [e.target.name]: e.target.value,
-            file: e.target.files[0],
-        });
+        this.setState(
+            {
+                [e.target.name]: e.target.value,
+            },
+            () => console.log("this.state after setState: ", this.state)
+        );
     }
 
-    async submit() {
-        console.log("submit was clicked");
-        const formData = new FormData();
-        formData.append("file", this.state.file);
+    async post() {
+        console.log("post was clicked");
+        // const formData = new FormData();
+        // formData.append("file", this.state.file);
+
+        try {
+            const { data } = await axios.post("/api/add-posts", this.state);
+            console.log("data-->Post Uploader: ", data);
+            this.props.postPost(data);
+        } catch (err) {
+            console.log("err in /post uploader-->submit post: ", err);
+            this.setState({
+                error: true,
+            });
+        }
     }
 
     render() {
@@ -34,12 +47,14 @@ export default class PostUploader extends Component {
             <div className={"post-uploader"}>
                 <h2>Post something:</h2>
                 <textarea
-                    name="bio"
+                    name="text"
                     defaultValue={this.props.bio}
                     onChange={(e) => this.handleChange(e)}
                 ></textarea>{" "}
+                {/* <br /> */}
+                {/* <button toggleUploader={props.toggleUploader}>Add Image</button> */}
                 <br />
-                <button onClick={() => this.submit()}>Post</button>
+                <button onClick={() => this.post()}>Post</button>
                 {this.state.error && <p>Something broke :(</p>}
             </div>
         );

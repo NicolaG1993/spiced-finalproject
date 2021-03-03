@@ -366,6 +366,18 @@ app.get("/api/get-followers", async (req, res) => {
 });
 
 /////*****POSTS*****/////
+
+app.get("/api/all-posts", async (req, res) => {
+    try {
+        const { rows } = await db.getAllPosts();
+        console.log("rows (getAllPosts): ", rows);
+        res.json({ rows, userId: req.session.userId });
+    } catch (err) {
+        console.log("err with db.getAllPosts: ", err);
+        res.json({ error: true });
+    }
+});
+
 app.get("/api/following-posts", async (req, res) => {
     try {
         const { rows } = await db.followingUsersPosts(req.session.userId);
@@ -388,12 +400,33 @@ app.get("/api/user-posts", async (req, res) => {
 });
 
 app.post("/api/add-posts", async (req, res) => {
-    try {
-        const results = await db.postPost(req.session.userId);
-        console.log("rows (postPost): ", results);
-        res.json(results);
-    } catch (err) {
-        console.log("err with db.postPost: ", err);
+    console.log("POST req to route /api/add-posts");
+    console.log("req.body: ", req.body);
+
+    // try {
+    //     const results = await db.postPost(req.session.userId, req.body.text);
+    //     console.log("rows (postPost): ", results);
+    //     res.json(results);
+    // } catch (err) {
+    //     console.log("err with db.postPost: ", err);
+    //     res.json({ error: true });
+    // }
+
+    if (req.body.text) {
+        try {
+            const { rows } = await db.postPost(
+                req.session.userId,
+                req.body.text,
+                req.body.file
+            );
+            console.log("rows in db.postPost: ", rows);
+            res.json(rows[0]);
+        } catch (err) {
+            console.log("err with db.postPost: ", err);
+            res.json({ error: true });
+        }
+    } else {
+        console.log("No text in post!");
         res.json({ error: true });
     }
 });

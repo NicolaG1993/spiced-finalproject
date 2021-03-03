@@ -48,5 +48,14 @@ export function reducer(state = {}, action) {
         };
     }
 
+    if (action.type === "GET_ALL_POSTS") {
+        state = {
+            ...state,
+            posts: action.payload,
+            userId: action.userId,
+        };
+        console.log("state in get all post(reducer): ", state);
+    }
+
     return state;
 }
