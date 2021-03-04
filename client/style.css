@@ -6,8 +6,8 @@ body {
     /* background-color: rgb(42, 65, 195); */
     color: ghostwhite;
     background-color: rgb(22, 25, 41);
-
     font-family: "Nunito Sans";
+    overflow-x: hidden;
 }
 
 /* GENERAL */
@@ -29,8 +29,8 @@ a:hover {
 }
 
 input,
-button {
-    cursor: pointer;
+button,
+select {
     width: 250px;
     padding: 5px;
     margin: 5px 0;
@@ -44,6 +44,7 @@ input {
 }
 
 button {
+    cursor: pointer;
     color: ghostwhite;
     background-color: rgb(45, 48, 70);
     box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.212);
@@ -52,6 +53,10 @@ button {
 button:hover {
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.212);
     background-color: rgb(22, 25, 41);
+}
+
+select {
+    cursor: pointer;
 }
 
 /* WELCOME */
@@ -140,6 +145,14 @@ nav > a {
     cursor: pointer;
 }
 
+.very-small {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
 .small {
     width: 40px;
     height: 40px;
@@ -158,4 +171,75 @@ nav > a {
     width: 200px;
     height: 200px;
     object-fit: cover;
+}
+
+/* SHOP */
+
+.categories {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.category {
+    position: relative;
+    max-height: 300px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    cursor: pointer;
+    transition: 0.5s ease;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    margin: 3px;
+}
+
+.category > a {
+    max-height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-pic {
+    object-fit: cover;
+    object-position: center;
+    max-height: 300px;
+    /* limite solo per standard desktop */
+    transition: 1.5s ease;
+    vertical-align: middle;
+}
+
+.category-title {
+    position: absolute;
+    /* top: -50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); */
+    text-align: center;
+    font-size: 20pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.897);
+    opacity: 0%;
+    transition: 0.5s ease;
+    z-index: 7;
+    /* padding: auto; */
+}
+
+.category:hover {
+    filter: grayscale(100%);
+}
+
+.category:hover > a > .category-title {
+    opacity: 100%;
+    padding: 5% 15%;
+    width: 100%;
+}
+
+.category:hover > a > .category-pic {
+    opacity: 100%;
+    max-height: 310px;
 }

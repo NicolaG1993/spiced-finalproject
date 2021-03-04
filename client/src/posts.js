@@ -41,7 +41,7 @@ export default function Posts(props) {
                         <p>{elem.created_at}</p>
                         <p>{elem.text}</p>
 
-                        <Comments postId={elem.post_id} size="small" />
+                        <Comments postId={elem.post_id} size="very-small" />
                     </div>
                 );
             })}

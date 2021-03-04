@@ -150,9 +150,19 @@ module.exports.postPost = (id, text, pic) => {
 //     return db.query(myQuery);
 // };
 
+// module.exports.getPostComments = (post_id) => {
+//     const myQuery = `SELECT * FROM comments
+//     WHERE post_id = $1`;
+//     const key = [post_id];
+//     return db.query(myQuery, key);
+// };
+
 module.exports.getPostComments = (post_id) => {
     const myQuery = `SELECT * FROM comments
-    WHERE post_id = $1`;
+    JOIN users
+    ON user_id = users.id
+    WHERE post_id = $1
+    ORDER BY comments.created_at ASC`;
     const key = [post_id];
     return db.query(myQuery, key);
 };
@@ -162,3 +172,29 @@ module.exports.addComment = (post_id, user_id, text) => {
     const keys = [post_id, user_id, text];
     return db.query(myQuery, keys);
 };
+
+// SHOP
+module.exports.getItems = (category) => {
+    const myQuery = `SELECT * FROM shop_items
+    JOIN users
+    ON seller_id = users.id
+    WHERE category = $1
+    ORDER BY shop_items.created_at ASC`;
+    const key = [category];
+    return db.query(myQuery, key);
+};
+
+module.exports.addItem = (title, seller_id, text, category, price, pic) => {
+    const myQuery = `INSERT INTO shop_items (title, seller_id, text, category, price, pic_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
+    const keys = [title, seller_id, text, category, price, pic];
+    return db.query(myQuery, keys);
+};
+
+module.exports.buyItem = (id, buyer_id) => {
+    const myQuery = `UPDATE shop_items
+    SET buyer_id = $2
+    WHERE item_id = $1
+    RETURNING *`;
+    const keys = [id, buyer_id];
+    return db.query(myQuery, keys);
+}; //da finire

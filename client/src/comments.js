@@ -83,6 +83,17 @@ export default class Comments extends Component {
                         comments.map((elem, index) => {
                             return (
                                 <div className="comment" key={index}>
+                                    <img
+                                        src={
+                                            elem.profile_pic_url ||
+                                            "default.jpg"
+                                        }
+                                        className={`${this.props.size}`}
+                                    />
+                                    <p>
+                                        {elem.first} {elem.last}:
+                                    </p>
+                                    <p>{elem.created_at}</p>
                                     <p>{elem.comment}</p>
                                 </div>
                             );

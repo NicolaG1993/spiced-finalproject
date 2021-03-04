@@ -455,6 +455,56 @@ app.post("/api/post-comment", async (req, res) => {
     }
 });
 
+/////*****SHOP*****/////
+app.get("/api/all-items/:category", async (req, res) => {
+    console.log("req: ", req.params);
+    let category = req.params.category;
+    try {
+        const { rows } = await db.getItems(category);
+        console.log("rows (getItems): ", rows);
+        res.json(rows);
+    } catch (err) {
+        console.log("err with db.getItems: ", err);
+        res.json({ error: true });
+    }
+});
+
+app.post("/api/add-item", async (req, res) => {
+    console.log("req.body: ", req.body);
+
+    try {
+        const { rows } = await db.addItem(
+            req.body.title,
+            req.session.userId,
+            req.body.text,
+            req.body.category,
+            req.body.price,
+            req.body.file
+        );
+        console.log("rows (addItem): ", rows);
+        res.json(rows);
+    } catch (err) {
+        console.log("err with db.addItem: ", err);
+        res.json({ error: true });
+    }
+});
+
+app.post("/api/buy-item/:item_id", async (req, res) => {
+    console.log("req.body: ", req.body);
+
+    try {
+        const { rows } = await db.buyItem(
+            req.params.item_id,
+            req.session.userId
+        );
+        console.log("rows (buyItem): ", rows);
+        res.json(rows);
+    } catch (err) {
+        console.log("err with db.buyItem: ", err);
+        res.json({ error: true });
+    }
+});
+
 /////*****MORE*****/////
 app.get("/logout", requireLoggedInUser, (req, res) => {
     req.session = null;

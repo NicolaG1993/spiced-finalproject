@@ -13,6 +13,7 @@ import SearchUsers from "./find-people";
 import Followers from "./followers-list";
 import Chat from "./chat";
 import Shop from "./shop";
+import ShopCategory from "./shop-category";
 
 // import PostUploader from "./post-uploader";
 // import PostImageUploader from "./post-image-uploader";
@@ -29,11 +30,13 @@ export class App extends Component {
             profilePicUrl: props.profile_pic_url || "",
             bio: "",
             size: "",
+            category: "",
         };
 
         this.toggleUploader = this.toggleUploader.bind(this);
         this.setProfilePicUrl = this.setProfilePicUrl.bind(this);
         this.setBio = this.setBio.bind(this);
+        this.setCategory = this.setCategory.bind(this);
     }
 
     async componentDidMount() {
@@ -80,6 +83,13 @@ export class App extends Component {
         console.log("setBio activated");
         this.setState({
             bio: bioText,
+        });
+    }
+
+    setCategory(category) {
+        console.log("setCategory activated");
+        this.setState({
+            category: category,
         });
     }
 
@@ -174,7 +184,19 @@ export class App extends Component {
 
                         <Route path="/chat" render={() => <Chat />} />
 
-                        <Route path="/shop" render={() => <Shop />} />
+                        <Route
+                            path="/shop"
+                            render={() => (
+                                <Shop setCategory={this.setCategory} />
+                            )}
+                        />
+
+                        <Route
+                            path="/shop-category"
+                            render={() => (
+                                <ShopCategory category={this.state.category} />
+                            )}
+                        />
 
                         <Route path="/item/:id" render={() => <Item />} />
                     </div>
