@@ -16,7 +16,7 @@ export default function Profile(props) {
             />
             <BioEditor bio={props.bio} setBio={props.setBio} />
 
-            <PostUploader />
+            {/* <PostUploader /> */}
         </div>
     );
 }

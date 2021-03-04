@@ -39,7 +39,7 @@ export default function FollowButton(props) {
 
     return (
         <>
-            <button className="auto" onClick={() => btnRequest()}>
+            <button className="auto clear" onClick={() => btnRequest()}>
                 {buttonText}
             </button>
         </>

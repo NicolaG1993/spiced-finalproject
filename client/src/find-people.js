@@ -41,7 +41,7 @@ export default function SearchUsers() {
     }, [user]);
 
     return (
-        <div>
+        <div className="find-people">
             <h1>USERS</h1>
             <input
                 name="user"
@@ -53,16 +53,16 @@ export default function SearchUsers() {
 
             {users.map((user, index) => {
                 return (
-                    <div key={index}>
+                    <div key={index} className="founded">
                         <Link to={`/user/${user.id}`}>
                             <img
                                 className="findusers"
                                 src={user.profile_pic_url || "/default.png"}
                                 alt={`${user.first} ${user.last}`}
                             />
-                            <p className="invertedLink">
+                            <h3 className="invertedLink">
                                 {user.first} {user.last}
-                            </p>
+                            </h3>
                         </Link>
                     </div>
                 );

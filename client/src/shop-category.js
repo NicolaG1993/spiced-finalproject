@@ -18,6 +18,38 @@ export default class ShopCategory extends Component {
         console.log("ShopCategory component did mount");
         console.log("this.props: ", this.props);
 
+        if (this.props.category === "Guitars") {
+            this.setState({
+                banner:
+                    "https://www.adorama.com/alc/wp-content/uploads/2017/08/shutterstock_584510992-1024x681.jpg",
+            });
+        } else if (this.props.category === "Drums") {
+            this.setState({
+                banner:
+                    "https://cdn.technologynetworks.com/tn/images/thumbs/jpeg/640_360/how-playing-the-drums-changes-the-brain-328265.jpg",
+            });
+        } else if (this.props.category === "Microphones") {
+            this.setState({
+                banner:
+                    "https://mynewmicrophone.com/wp-content/uploads/2019/07/mnm_What_Is_Microphone_Feedback_And_How_To_Eliminate_It_For_Good_large.jpg",
+            });
+        } else if (this.props.category === "Keyboards") {
+            this.setState({
+                banner:
+                    "https://usa.yamaha.com/files/keyboardsindex_6aecfb3aa62a2ecfca1204dea45918da.jpg?impolicy=resize&imwid=4648&imhei=2848",
+            });
+        } else if (this.props.category === "Amps") {
+            this.setState({
+                banner:
+                    "https://www.thomann.de/blog/wp-content/uploads/2017/01/modeling-guitar-amps.jpg",
+            });
+        } else if (this.props.category === "Pedals") {
+            this.setState({
+                banner:
+                    "https://cdn.technologynetworks.com/tn/images/thumbs/jpeg/640_360/how-playing-the-drums-changes-the-brain-328265.jpg",
+            });
+        }
+
         try {
             const { data } = await axios.get(
                 `/api/all-items/${this.props.category}`
@@ -85,7 +117,9 @@ export default class ShopCategory extends Component {
         return (
             <div id="shop-category">
                 <h1>{this.props.category}</h1>
-                <div className="slider">Some images here...</div>
+                <div className="category-banner">
+                    <img src={this.state.banner} />
+                </div>
 
                 <h2>Items from the community</h2>
 

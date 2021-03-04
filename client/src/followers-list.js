@@ -61,57 +61,61 @@ export default function Followers(props) {
 
     return (
         <div className="followers-list">
-            <h2>Following</h2>
-            {following.map((elem, index) => {
-                return (
-                    <div className="userCard" key={index}>
-                        <img
-                            className="findusers"
-                            src={elem.profile_pic_url || "/default.png"}
-                            alt={`${elem.first} ${elem.last}`}
-                        />
-                        <p>
-                            {elem.first} {elem.last}
-                        </p>
+            <div className="following">
+                <h2>Following</h2>
+                {following.map((elem, index) => {
+                    return (
+                        <div className="userCard" key={index}>
+                            <img
+                                className="findusers"
+                                src={elem.profile_pic_url || "/default.png"}
+                                alt={`${elem.first} ${elem.last}`}
+                            />
+                            <p>
+                                {elem.first} {elem.last}
+                            </p>
 
-                        <button onClick={() => dispatch(unfollow(elem.id))}>
-                            Unfollow
-                        </button>
-                    </div>
-                );
-            })}
+                            <button onClick={() => dispatch(unfollow(elem.id))}>
+                                Unfollow
+                            </button>
+                        </div>
+                    );
+                })}
+            </div>
 
-            <h2>Followers</h2>
-            {followers.map((elem, index) => {
-                let btnElem = (
-                    <button onClick={() => dispatch(follow(elem.id))}>
-                        Follow
-                    </button>
-                );
-
-                if (elem.sender_id === props.userId || elem.following) {
-                    btnElem = (
-                        <button onClick={() => dispatch(unfollow(elem.id))}>
-                            Unfollow
+            <div className="followers">
+                <h2>Followers</h2>
+                {followers.map((elem, index) => {
+                    let btnElem = (
+                        <button onClick={() => dispatch(follow(elem.id))}>
+                            Follow
                         </button>
                     );
-                }
 
-                return (
-                    <div className="userCard" key={index}>
-                        <img
-                            className="findusers"
-                            src={elem.profile_pic_url || "/default.png"}
-                            alt={`${elem.first} ${elem.last}`}
-                        />
-                        <p>
-                            {elem.first} {elem.last}
-                        </p>
+                    if (elem.sender_id === props.userId || elem.following) {
+                        btnElem = (
+                            <button onClick={() => dispatch(unfollow(elem.id))}>
+                                Unfollow
+                            </button>
+                        );
+                    }
 
-                        {btnElem}
-                    </div>
-                );
-            })}
+                    return (
+                        <div className="userCard" key={index}>
+                            <img
+                                className="findusers"
+                                src={elem.profile_pic_url || "/default.png"}
+                                alt={`${elem.first} ${elem.last}`}
+                            />
+                            <p>
+                                {elem.first} {elem.last}
+                            </p>
+
+                            {btnElem}
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }

@@ -50,7 +50,7 @@ export default class OtherProfile extends Component {
             // );
         }
         return (
-            <div className="otherProfile">
+            <div className="profileComp">
                 <h1>
                     {this.state.first} {this.state.last}
                 </h1>

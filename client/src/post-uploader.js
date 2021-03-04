@@ -44,7 +44,7 @@ export default class PostUploader extends Component {
 
     render() {
         return (
-            <div className={"post-uploader"}>
+            <div className="post-uploader">
                 <textarea
                     name="text"
                     placeholder="Type something..."

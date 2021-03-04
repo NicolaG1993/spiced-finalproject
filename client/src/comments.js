@@ -81,6 +81,11 @@ export default class Comments extends Component {
                 <div className="comments">
                     {comments &&
                         comments.map((elem, index) => {
+                            var date = new Date(elem.created_at);
+                            var ukDate = new Intl.DateTimeFormat("en-GB", {
+                                dateStyle: "long",
+                                timeStyle: "short",
+                            }).format(date);
                             return (
                                 <div className="comment" key={index}>
                                     <img
@@ -90,11 +95,15 @@ export default class Comments extends Component {
                                         }
                                         className={`${this.props.size}`}
                                     />
-                                    <p>
-                                        {elem.first} {elem.last}:
-                                    </p>
-                                    <p>{elem.created_at}</p>
-                                    <p>{elem.comment}</p>
+                                    <div className="poster">
+                                        <p>
+                                            <strong>
+                                                {elem.first} {elem.last}:
+                                            </strong>
+                                        </p>
+                                        <p>{ukDate}</p>
+                                        <p className="text">{elem.comment}</p>
+                                    </div>
                                 </div>
                             );
                         })}

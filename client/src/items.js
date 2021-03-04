@@ -41,7 +41,7 @@ export default function Items(props) {
                                 <h3>{elem.title}</h3>
                                 {/* <p>{elem.created_at}</p> */}
                                 <img
-                                    src={elem.pic_url || "default.png"}
+                                    src={elem.pic_url || "no-image.png"}
                                     // className={`${props.size}`}
                                 />
                                 <p>{elem.price}€</p>
@@ -56,7 +56,7 @@ export default function Items(props) {
                                 <h3>{elem.title}</h3>
                                 {/* <p>{elem.created_at}</p> */}
                                 <img
-                                    src={elem.pic_url || "default.png"}
+                                    src={elem.pic_url || "no-image.png"}
                                     // className={`${props.size}`}
                                 />
                                 <p>{elem.price}€</p>

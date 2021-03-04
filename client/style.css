@@ -59,6 +59,16 @@ select {
     cursor: pointer;
 }
 
+textarea {
+    width: 100%;
+    min-height: 50px;
+}
+
+.clear {
+    clear: both;
+    margin-top: 20px;
+}
+
 /* WELCOME */
 #welcome {
     padding: 90px 25px 5px 25px;
@@ -73,6 +83,10 @@ select {
     border-radius: 25px;
 }
 
+#welcome > img {
+    max-height: 192px;
+}
+
 /* HEADER */
 .header {
     background-color: rgb(22, 25, 41);
@@ -85,7 +99,7 @@ select {
 }
 
 .logo > img {
-    height: 35px;
+    height: 37px;
     float: left;
 }
 
@@ -128,17 +142,97 @@ nav > a {
     height: 33vh;
     width: 100%;
     margin-bottom: 50px;
+    transition: 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider > p {
+    font-size: 20pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: whitesmoke;
+    /* background-color: rgba(0, 0, 0, 0.897); */
+    opacity: 0%;
+    transition: 0.5s ease;
+    position: absolute;
+
+    text-align: center;
+}
+
+.slider:hover {
+    filter: grayscale(80%);
+}
+
+.slider:hover > p {
+    opacity: 100%;
+    padding: 5% 15%;
+    width: 100%;
 }
 
 /* POSTS */
 .post {
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0.342);
     border-radius: 10px;
     margin: 10px 0;
-    padding: 5px;
+    padding: 15px;
+}
+
+.post > img,
+.comment > img {
+    float: left;
+    margin-right: 10px;
+}
+
+.text {
+    /* clear: both; */
+    margin-top: 15px;
+}
+.poster > p:nth-child(2) {
+    font-size: 9pt;
+    color: darkgrey;
+}
+
+.comments {
+    margin: 10px 0;
+}
+
+.comment {
+    margin: 10px 0;
+    background-color: rgba(128, 128, 128, 0.342);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.comment-uploader {
+    margin-top: 25px;
 }
 
 /* PROFILE */
+.profileComp {
+    margin: 10px 0;
+    background-color: rgba(128, 128, 128, 0.342);
+    border-radius: 10px;
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+}
+
+.profileComp > .profile-pic,
+.profileComp > img {
+    float: left;
+    margin: 0 50px 25px 0;
+}
+
+.bio-editor > textarea {
+    width: auto;
+    clear: both;
+    /* width: auto; */
+    min-width: 250px;
+    min-height: 100px;
+    max-width: 100%;
+}
 
 /* PROFILE PIC */
 .profile-pic > img {
@@ -174,6 +268,29 @@ nav > a {
 }
 
 /* SHOP */
+
+.banner {
+    background-image: url("https://www.adorama.com/alc/wp-content/uploads/2017/08/shutterstock_584510992-1024x681.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 33vh;
+    width: 100%;
+    margin-bottom: 50px;
+    transition: 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-banner > img {
+    height: 33vh;
+    width: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+}
 
 .categories {
     display: inline-grid;
@@ -242,4 +359,70 @@ nav > a {
 .category:hover > a > .category-pic {
     opacity: 100%;
     max-height: 310px;
+}
+
+/* SHOP-CATEGORY */
+.items-container {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.item {
+    background-color: grey;
+    border-radius: 10px;
+    margin: 15px;
+    padding: 10px;
+}
+
+.item > img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.sold > button {
+    background-color: rgba(255, 0, 0, 0.616);
+}
+
+/* FIND USERS */
+.find-people {
+}
+
+.founded {
+    margin: 10px 0;
+    background-color: rgba(128, 128, 128, 0.342);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.founded > a:hover {
+    background-color: transparent;
+    color: ghostwhite;
+}
+
+.findusers {
+    background-color: rgba(248, 248, 255, 0.801);
+}
+
+/* FOLLOWERS LIST */
+
+.followers-list {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.following {
+}
+
+.followers {
+}
+
+.userCard {
+    margin: 10px;
+    background-color: rgba(128, 128, 128, 0.342);
+    border-radius: 10px;
+    padding: 15px;
 }

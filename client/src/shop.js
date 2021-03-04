@@ -43,7 +43,7 @@ export default class Shop extends Component {
             <div id="shop">
                 <h1>Shop</h1>
 
-                <div className="slider">Some images here...</div>
+                <div className="banner">Some promo here...</div>
 
                 <h2>Select a category</h2>
 

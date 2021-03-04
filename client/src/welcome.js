@@ -6,7 +6,7 @@ import ResetPassword from "./reset-psw";
 export default function Welcome() {
     return (
         <div id="welcome">
-            <img src="/logo192.png" />
+            <img src="/logo-white.png" />
             <HashRouter>
                 <div>
                     <Route exact path="/" component={Registration} />

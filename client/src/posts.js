@@ -29,18 +29,27 @@ export default function Posts(props) {
     return (
         <div className="postsComp">
             {posts.map((elem, index) => {
+                var date = new Date(elem.created_at);
+                var ukDate = new Intl.DateTimeFormat("en-GB", {
+                    dateStyle: "long",
+                    timeStyle: "short",
+                }).format(date);
                 return (
                     <div className="post" key={index}>
                         <img
                             src={elem.profile_pic_url || "default.jpg"}
                             className={`${props.size}`}
                         />
-                        <p>
-                            {elem.first} {elem.last}:
-                        </p>
-                        <p>{elem.created_at}</p>
-                        <p>{elem.text}</p>
+                        <div className="poster">
+                            <p>
+                                <strong>
+                                    {elem.first} {elem.last}:
+                                </strong>
+                            </p>
+                            <p>{ukDate}</p>
 
+                            <p className="text">{elem.text}</p>
+                        </div>
                         <Comments postId={elem.post_id} size="very-small" />
                     </div>
                 );

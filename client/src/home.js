@@ -4,6 +4,7 @@ import { Component } from "react";
 import PostUploader from "./post-uploader";
 // import PostImageUploader from "./post-image-uploader";
 import Posts from "./posts";
+import { Link } from "react-router-dom";
 
 export default class Home extends Component {
     constructor(props) {
@@ -85,7 +86,11 @@ export default class Home extends Component {
             <div id="home">
                 <h1>Hi {this.props.firstName}</h1>
 
-                <div className="slider">Some images here...</div>
+                <Link to={`/shop`}>
+                    <div className="slider">
+                        <p>Go to the shop</p>
+                    </div>
+                </Link>
 
                 <h2>Posts from the community</h2>
 
