@@ -4,39 +4,44 @@ import axios from "./axios";
 // import { getAllPosts } from "./redux/actions";
 import { Link } from "react-router-dom";
 
-export default function Posts() {
-    // console.log("Posts.js props", props);
+import Comments from "./comments";
 
-    const [posts, setPosts] = useState([]);
+export default function Posts(props) {
+    console.log("Posts.js props", props);
+    let posts = props.posts.rows;
 
-    useEffect(() => {
-        console.log("POSTS ACTIVATED!!!");
-        let abort = false;
-
-        (async () => {
-            try {
-                const { data } = await axios.get(`/api/all-posts`);
-                console.log("data in Posts: ", data);
-                if (!abort) {
-                    console.log("!abort");
-                    setPosts(data.rows);
-                }
-            } catch (err) {
-                console.log("err with axios: ", err);
-                abort = true;
-            }
-        })();
-        return () => {
-            abort = true;
-        };
-    }, []);
+    if (!posts) {
+        console.log("posts is empty: ", posts);
+        return null;
+        // return (
+        //     <div className="spinner-container">
+        //         <div className="spinner"></div>
+        //     </div>
+        // );
+        // return (
+        //     <div>
+        //         <h2>My Friends</h2>
+        //         <p>No results</p>
+        //     </div>
+        // );
+    }
 
     return (
         <div className="postsComp">
             {posts.map((elem, index) => {
                 return (
-                    <div key={index}>
+                    <div className="post" key={index}>
+                        <img
+                            src={elem.profile_pic_url || "default.jpg"}
+                            className={`${props.size}`}
+                        />
+                        <p>
+                            {elem.first} {elem.last}:
+                        </p>
+                        <p>{elem.created_at}</p>
                         <p>{elem.text}</p>
+
+                        <Comments postId={elem.post_id} size="small" />
                     </div>
                 );
             })}

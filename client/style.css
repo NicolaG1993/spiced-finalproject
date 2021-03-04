@@ -101,6 +101,10 @@ nav > a {
     border-radius: 25px;
 }
 
+.header > .profile-pic > a > img {
+    float: right;
+}
+
 /* MAIN */
 .main {
     padding: 100px 25px 5px 25px;
@@ -121,6 +125,14 @@ nav > a {
     margin-bottom: 50px;
 }
 
+/* POSTS */
+.post {
+    background-color: grey;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 5px;
+}
+
 /* PROFILE */
 
 /* PROFILE PIC */
@@ -132,7 +144,7 @@ nav > a {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    float: right;
+
     object-fit: cover;
 }
 

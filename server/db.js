@@ -102,7 +102,11 @@ module.exports.followersList = (id) => {
 
 // POSTS
 module.exports.getAllPosts = () => {
-    const myQuery = `SELECT * FROM posts ORDER BY id DESC LIMIT 10`;
+    const myQuery = `SELECT * FROM posts 
+    JOIN users 
+    ON sender_id = users.id
+    ORDER BY posts.created_at DESC 
+    LIMIT 10`;
     return db.query(myQuery);
 };
 
@@ -112,28 +116,49 @@ module.exports.postPost = (id, text, pic) => {
     return db.query(myQuery, keys);
 }; // not tested yet
 
-module.exports.followingUsersPosts = (userId) => {
-    const myQuery = `SELECT users.id, first, last, profile_pic_url, sender_id
-    FROM follows
-    JOIN users
-    ON (sender_id = users.id AND recipient_id = $1)
-    JOIN comments
-    ON comments.user_id = users.id
-    ORDER BY posts.created_at DESC
-    LIMIT 10`;
-    const key = [userId];
-    return db.query(myQuery, key);
-}; // not tested yet
+// module.exports.followingUsersPosts = (userId) => {
+//     const myQuery = `SELECT users.id, first, last, profile_pic_url, sender_id
+//     FROM follows
+//     JOIN users
+//     ON (sender_id = users.id AND recipient_id = $1)
+//     JOIN comments
+//     ON comments.user_id = users.id
+//     ORDER BY posts.created_at DESC
+//     LIMIT 10`;
+//     const key = [userId];
+//     return db.query(myQuery, key);
+// }; // not tested yet
 
-module.exports.userPosts = (userId) => {
-    const myQuery = `SELECT users.id, first, last, profile_pic_url
-    FROM users
-    JOIN comments
-    ON (users.id = $1 AND comments.user_id = users.id)
-    ORDER BY posts.created_at DESC
-    LIMIT 10`;
-    const key = [userId];
-    return db.query(myQuery, key);
-}; // not tested yet
+// module.exports.userPosts = (userId) => {
+//     const myQuery = `SELECT users.id, first, last, profile_pic_url
+//     FROM users
+//     JOIN comments
+//     ON (users.id = $1 AND comments.user_id = users.id)
+//     ORDER BY posts.created_at DESC
+//     LIMIT 10`;
+//     const key = [userId];
+//     return db.query(myQuery, key);
+// }; // not tested yet
 
 // COMMENTS
+// module.exports.getAllComments = () => {
+//     const myQuery = `SELECT * FROM comments
+//     JOIN users
+//     ON user_id = users.id
+//     ORDER BY comments.created_at DESC
+//     LIMIT 10`;
+//     return db.query(myQuery);
+// };
+
+module.exports.getPostComments = (post_id) => {
+    const myQuery = `SELECT * FROM comments
+    WHERE post_id = $1`;
+    const key = [post_id];
+    return db.query(myQuery, key);
+};
+
+module.exports.addComment = (post_id, user_id, text) => {
+    const myQuery = `INSERT INTO comments (post_id, user_id, comment) VALUES ($1, $2, $3) RETURNING *`;
+    const keys = [post_id, user_id, text];
+    return db.query(myQuery, keys);
+};

@@ -31,7 +31,7 @@ export default class PostUploader extends Component {
         // formData.append("file", this.state.file);
 
         try {
-            const { data } = await axios.post("/api/add-posts", this.state);
+            const { data } = await axios.post("/add-posts", this.state);
             console.log("data-->Post Uploader: ", data);
             this.props.postPost(data);
         } catch (err) {
@@ -45,9 +45,9 @@ export default class PostUploader extends Component {
     render() {
         return (
             <div className={"post-uploader"}>
-                <h2>Post something:</h2>
                 <textarea
                     name="text"
+                    placeholder="Type something..."
                     defaultValue={this.props.bio}
                     onChange={(e) => this.handleChange(e)}
                 ></textarea>{" "}

@@ -11,7 +11,8 @@ import Uploader from "./uploader";
 import OtherProfile from "./other-profile";
 import SearchUsers from "./find-people";
 import Followers from "./followers-list";
-// import Chat from "./chat";
+import Chat from "./chat";
+import Shop from "./shop";
 
 // import PostUploader from "./post-uploader";
 // import PostImageUploader from "./post-image-uploader";

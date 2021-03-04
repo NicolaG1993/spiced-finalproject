@@ -10,7 +10,7 @@ export default function ProfilePic(props) {
                     onClick={props.toggleUploader}
                     src={props.profilePicUrl || "/default.png"}
                     alt={`${props.firstName} ${props.lastName}`}
-                    className={`${props.size} white-frame`}
+                    className={`${props.size}`}
                 />
             </div>
         );
@@ -22,7 +22,7 @@ export default function ProfilePic(props) {
                     <img
                         src={props.profilePicUrl || "/default.png"}
                         alt={`${props.firstName} ${props.lastName}`}
-                        className={`${props.size} white-frame`}
+                        className={`${props.size}`}
                     />
                 </Link>
             </div>

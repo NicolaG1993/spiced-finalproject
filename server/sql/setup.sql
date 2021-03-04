@@ -1,8 +1,8 @@
 -- DROP TABLE IF EXISTS users;
 -- DROP TABLE IF EXISTS reset_codes;
 -- DROP TABLE IF EXISTS follows;
--- DROP TABLE IF EXISTS posts;
--- DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS comments;
 -- DROP TABLE IF EXISTS shop_items;
 
 CREATE TABLE users(
@@ -31,7 +31,7 @@ CREATE TABLE follows(
 );
 
 CREATE TABLE posts(
-    id SERIAL PRIMARY KEY,
+    post_id SERIAL PRIMARY KEY,
     sender_id INT REFERENCES users(id) NOT NULL,
     pic_url VARCHAR(255),
     text VARCHAR(255),
@@ -40,7 +40,7 @@ CREATE TABLE posts(
 
 CREATE TABLE comments(
     id SERIAL PRIMARY KEY,
-    post_id INT REFERENCES posts(id) NOT NULL,
+    post_id INT REFERENCES posts(post_id) NOT NULL,
     user_id INT REFERENCES users(id) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     comment VARCHAR(255) NOT NULL CHECK (comment != '')

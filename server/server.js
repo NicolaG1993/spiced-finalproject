@@ -378,16 +378,16 @@ app.get("/api/all-posts", async (req, res) => {
     }
 });
 
-app.get("/api/following-posts", async (req, res) => {
-    try {
-        const { rows } = await db.followingUsersPosts(req.session.userId);
-        console.log("rows (followingUsersPosts): ", rows);
-        res.json(rows);
-    } catch (err) {
-        console.log("err with db.followingUsersPosts: ", err);
-        res.json({ error: true });
-    }
-});
+// app.get("/api/following-posts", async (req, res) => {
+//     try {
+//         const { rows } = await db.followingUsersPosts(req.session.userId);
+//         console.log("rows (followingUsersPosts): ", rows);
+//         res.json(rows);
+//     } catch (err) {
+//         console.log("err with db.followingUsersPosts: ", err);
+//         res.json({ error: true });
+//     }
+// });
 app.get("/api/user-posts", async (req, res) => {
     try {
         const { rows } = await db.followingUsersPosts(req.session.userId);
@@ -399,18 +399,9 @@ app.get("/api/user-posts", async (req, res) => {
     }
 });
 
-app.post("/api/add-posts", async (req, res) => {
+app.post("/add-posts", async (req, res) => {
     console.log("POST req to route /api/add-posts");
     console.log("req.body: ", req.body);
-
-    // try {
-    //     const results = await db.postPost(req.session.userId, req.body.text);
-    //     console.log("rows (postPost): ", results);
-    //     res.json(results);
-    // } catch (err) {
-    //     console.log("err with db.postPost: ", err);
-    //     res.json({ error: true });
-    // }
 
     if (req.body.text) {
         try {
@@ -427,6 +418,39 @@ app.post("/api/add-posts", async (req, res) => {
         }
     } else {
         console.log("No text in post!");
+        res.json({ error: true });
+    }
+});
+
+/////*****COMMENTS*****/////
+app.get("/api/all-comments/:post_id", async (req, res) => {
+    console.log("req: ", req.params);
+    let post_id = req.params.post_id;
+    try {
+        const { rows } = await db.getPostComments(post_id);
+        console.log("rows (getPostComments): ", rows);
+        res.json(rows);
+    } catch (err) {
+        console.log("err with db.getPostComments: ", err);
+        res.json({ error: true });
+    }
+});
+
+app.post("/api/post-comment", async (req, res) => {
+    console.log("req.body: ", req.body);
+    //devo passare post_id e newcomment da req.body
+    //e req.session.userId
+
+    try {
+        const { rows } = await db.addComment(
+            req.body.post_id,
+            req.session.userId,
+            req.body.newcomment
+        );
+        console.log("rows (addComment): ", rows);
+        res.json(rows);
+    } catch (err) {
+        console.log("err with db.addComment: ", err);
         res.json({ error: true });
     }
 });
