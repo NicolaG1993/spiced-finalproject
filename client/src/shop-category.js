@@ -46,7 +46,7 @@ export default class ShopCategory extends Component {
         } else if (this.props.category === "Pedals") {
             this.setState({
                 banner:
-                    "https://cdn.technologynetworks.com/tn/images/thumbs/jpeg/640_360/how-playing-the-drums-changes-the-brain-328265.jpg",
+                    "https://pitstopmusicians.com/images/Guitar-Effects-Pedals-Guide_PitStop_Musicians.jpg",
             });
         }
 

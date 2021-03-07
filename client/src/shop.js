@@ -125,7 +125,7 @@ export default class Shop extends Component {
                         >
                             <img
                                 className="category-pic"
-                                src="https://cdn.technologynetworks.com/tn/images/thumbs/jpeg/640_360/how-playing-the-drums-changes-the-brain-328265.jpg"
+                                src="https://pitstopmusicians.com/images/Guitar-Effects-Pedals-Guide_PitStop_Musicians.jpg"
 
                                 // onClick={<ShopCategory category="guitars" />}
                             />

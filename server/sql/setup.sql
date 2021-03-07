@@ -58,6 +58,13 @@ CREATE TABLE shop_items(
     category VARCHAR NOT NULL CHECK (category != '')
 );
 
+CREATE TABLE messages(
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    message VARCHAR(255) NOT NULL CHECK (message != '')
+);
+
 -- CREATE TABLE friendships(
 --     id SERIAL PRIMARY KEY,
 --     sender_id INT REFERENCES users(id) NOT NULL,
@@ -65,12 +72,7 @@ CREATE TABLE shop_items(
 --     accepted BOOLEAN DEFAULT false
 -- );
 
--- CREATE TABLE messages(
---     id SERIAL PRIMARY KEY,
---     user_id INT REFERENCES users(id) NOT NULL,
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     message VARCHAR(255) NOT NULL CHECK (message != '')
--- );
+
 
 -- createdb finalproject
 -- psql -d finalproject -f server/sql/setup.sql

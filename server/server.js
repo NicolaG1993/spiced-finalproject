@@ -521,6 +521,46 @@ server.listen(process.env.PORT || 3001, () => {
     console.log("I'm listening.");
 });
 
+/////*****SOCKET.IO*****/////
+io.on("connection", async (socket) => {
+    console.log(`Socket with id: ${socket.id} has connected!`);
+    console.log(socket.request.session);
+    const userId = socket.request.session.userId;
+    if (!userId) {
+        console.log("disconnect");
+        return socket.disconnect(true);
+    }
+
+    try {
+        const { rows } = await db.getMessages();
+        socket.emit("getMessages", rows.reverse());
+    } catch (err) {
+        console.log("error in getMessages: ", err);
+    }
+
+    socket.on("postMessage", async (data) => {
+        console.log(data);
+        try {
+            await db.postMessage(userId, data);
+            const { rows } = await db.getMessages();
+            io.emit("getMessages", rows.reverse());
+        } catch (err) {
+            console.log("error in postMessage: ", err);
+        }
+    });
+    // socket.on("thanks", function (data) {
+    //     console.log(data);
+    // });
+
+    // socket.emit("welcome", {
+    //     message: "Welome. It is nice to see you",
+    // });
+
+    socket.on("disconnect", () => {
+        console.log(`socket with the id ${socket.id} is now disconnected`);
+    });
+});
+
 /*
 
 OBBIETTIVI:

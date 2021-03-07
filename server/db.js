@@ -198,3 +198,19 @@ module.exports.buyItem = (id, buyer_id) => {
     const keys = [id, buyer_id];
     return db.query(myQuery, keys);
 }; //da finire
+
+// CHAT
+module.exports.getMessages = () => {
+    const myQuery = `SELECT * FROM messages
+    JOIN users
+    ON user_id = users.id
+    ORDER BY messages.created_at DESC
+    LIMIT 10`;
+    return db.query(myQuery);
+};
+
+module.exports.postMessage = (id, text) => {
+    const myQuery = `INSERT INTO messages (user_id, message) VALUES ($1, $2)`;
+    const keys = [id, text];
+    return db.query(myQuery, keys);
+};

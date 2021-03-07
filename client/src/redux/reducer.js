@@ -57,5 +57,15 @@ export function reducer(state = {}, action) {
         console.log("state in get all post(reducer): ", state);
     }
 
+    if (action.type === "GET_MSGS") {
+        state = { ...state, messages: action.payload };
+        console.log("state in GET_MSGS(reducer): ", state);
+    }
+
+    if (action.type === "POST_MSG") {
+        state = { ...state, message: action.payload };
+        console.log("state in POST_MSG(reducer): ", state);
+    }
+
     return state;
 }
